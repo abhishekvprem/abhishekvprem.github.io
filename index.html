@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek V Prem — Interior Design & Construction</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory:#F9F6F0; --warm-white:#FDFBF7; --sand:#E8DDD0; --taupe:#C4B5A5;
+  --mocha:#8B7355; --espresso:#3E2C1C; --charcoal:#2C2C2C;
+  --gold:#C9A96E; --gold-light:#E8D5B0; --sage:#A8B5A0; --accent:#7A9E8A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--charcoal);overflow-x:hidden;cursor:none}
+
+.cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s ease-out}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:26px 60px}
+nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(253,251,247,.97) 60%,transparent);pointer-events:none}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;letter-spacing:.14em;color:var(--espresso);text-decoration:none;position:relative;z-index:1}
+.nav-links{display:flex;gap:38px;list-style:none;position:relative;z-index:1}
+.nav-links a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--espresso);text-decoration:none;position:relative;transition:color .3s}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s ease}
+.nav-links a:hover::after{width:100%}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px;background:var(--ivory);position:relative;z-index:2}
+.hero-left::after{content:'';position:absolute;right:-44px;top:0;bottom:0;width:88px;background:var(--ivory);clip-path:polygon(0 0,0% 100%,100% 100%);z-index:3}
+.hero-eyebrow{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 1s ease .2s forwards}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(50px,5.8vw,84px);font-weight:300;line-height:1.05;color:var(--espresso);margin-bottom:10px;opacity:0;animation:fadeUp 1s ease .4s forwards}
+.hero-name em{font-style:italic;color:var(--mocha)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,22px);font-weight:300;color:var(--taupe);letter-spacing:.06em;margin-bottom:10px;opacity:0;animation:fadeUp 1s ease .55s forwards}
+.hero-quals{font-size:12px;color:var(--mocha);letter-spacing:.06em;margin-bottom:32px;font-weight:300;opacity:0;animation:fadeUp 1s ease .65s forwards}
+.hero-desc{font-size:14px;line-height:1.85;color:#7A6050;max-width:380px;margin-bottom:44px;font-weight:300;opacity:0;animation:fadeUp 1s ease .8s forwards}
+.hero-ctas{display:flex;gap:20px;align-items:center;opacity:0;animation:fadeUp 1s ease 1s forwards}
+.btn-primary{background:var(--espresso);color:var(--ivory);border:none;padding:14px 34px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .3s,transform .2s;display:inline-block}
+.btn-primary:hover{background:var(--gold);transform:translateY(-2px)}
+.btn-ghost{color:var(--espresso);font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:8px;transition:gap .3s,color .3s}
+.btn-ghost:hover{gap:14px;color:var(--gold)}
+.btn-ghost::after{content:'→';font-size:14px}
+.hero-right{position:relative;overflow:hidden;min-height:100vh}
+.hero-img-area{width:100%;height:100%;position:absolute;inset:0;background:linear-gradient(135deg,#D4C4B0,#B0987E 50%,#7A6050);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-img-area img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.hero-placeholder{position:relative;z-index:2;text-align:center;color:rgba(255,255,255,.5);pointer-events:none}
+.hero-placeholder .hp-icon{font-size:38px;margin-bottom:10px}
+.hero-placeholder p{font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.hero-stats{position:absolute;bottom:28px;right:28px;display:flex;gap:32px;z-index:5}
+.stat{text-align:right}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ivory);display:block}
+.stat-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+/* MARQUEE */
+.marquee-strip{background:var(--espresso);padding:15px 0;overflow:hidden}
+.marquee-track{display:flex;white-space:nowrap;animation:marquee 28s linear infinite}
+.marquee-item{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--gold-light);letter-spacing:.1em;padding:0 36px}
+.marquee-dot{color:var(--gold);font-size:8px;vertical-align:middle;margin:0 8px}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ABOUT */
+#about{padding:120px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-img-col{position:relative}
+.about-img-frame{width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,var(--sand),var(--taupe));position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.about-img-frame img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.aif-placeholder{text-align:center;color:rgba(255,255,255,.5);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;pointer-events:none;position:relative;z-index:1}
+.about-img-accent{position:absolute;bottom:-20px;right:-20px;width:50%;height:50%;border:2px solid var(--gold);z-index:-1}
+.about-badge{position:absolute;top:30px;left:-18px;background:var(--espresso);color:var(--gold-light);padding:14px 18px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
+.edu-cards{display:flex;flex-direction:column;gap:14px;margin-top:36px}
+.edu-card{border-left:2px solid var(--sand);padding:12px 16px;transition:border-color .3s}
+.edu-card:hover{border-color:var(--gold)}
+.edu-degree{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--espresso);margin-bottom:4px}
+.edu-school{font-size:12px;color:var(--mocha);letter-spacing:.05em}
+.edu-year{font-size:11px;color:var(--taupe);margin-top:3px;letter-spacing:.1em}
+.section-label{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.section-label::before{content:'';width:24px;height:1px;background:var(--gold)}
+.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:300;line-height:1.15;color:var(--espresso);margin-bottom:24px}
+.section-heading em{font-style:italic;color:var(--mocha)}
+.about-para{font-size:14px;line-height:1.9;color:#6B5A4A;font-weight:300;margin-bottom:14px}
+.skills-wrap{margin-top:28px}
+.skills-label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--taupe);margin-bottom:12px}
+.skills-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.skill-pill{border:1px solid var(--sand);padding:8px 14px;font-size:11px;letter-spacing:.1em;color:var(--mocha);text-transform:uppercase;transition:border-color .3s,background .3s}
+.skill-pill:hover{border-color:var(--gold);background:rgba(201,169,110,.12)}
+.skill-pill.hl{border-color:var(--gold);background:rgba(201,169,110,.15);color:var(--espresso)}
+
+/* PORTFOLIO */
+#portfolio{padding:100px 0 80px;background:var(--ivory)}
+.portfolio-header{padding:0 60px;display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:70px}
+.portfolio-total{font-family:'Cormorant Garamond',serif;font-size:70px;font-weight:300;color:var(--sand);line-height:1}
+
+.project-row{display:grid;grid-template-columns:1fr 1fr;min-height:480px;cursor:pointer;position:relative}
+.project-row:nth-child(even){direction:rtl}
+.project-row:nth-child(even)>*{direction:ltr}
+
+/* ── SLIDING COVER ── */
+.project-cover{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--sand),var(--taupe))}
+.cover-slider{position:absolute;inset:0;display:flex;transition:transform .9s cubic-bezier(.77,0,.18,1)}
+.cover-slide{min-width:100%;height:100%;flex-shrink:0;position:relative}
+.cover-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.cover-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;gap:10px;padding:20px;text-align:center;background:linear-gradient(135deg,var(--sand),var(--taupe))}
+.cover-ph-icon{font-size:30px;opacity:.4}
+/* dots on cover */
+.cover-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5}
+.cover-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .3s,transform .3s;cursor:pointer}
+.cover-dot.active{background:var(--gold);transform:scale(1.4)}
+
+.project-info{background:var(--ivory);padding:60px 50px;display:flex;flex-direction:column;justify-content:center}
+.project-num{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;color:var(--sand);line-height:1;margin-bottom:16px}
+.project-cat{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.project-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--espresso);margin-bottom:16px;line-height:1.2}
+.project-desc{font-size:13px;line-height:1.85;color:#7A6555;font-weight:300;margin-bottom:24px}
+.project-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.project-tag{border:1px solid var(--sand);padding:5px 12px;font-size:10px;letter-spacing:.14em;color:var(--taupe);text-transform:uppercase}
+.view-gallery-btn{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--espresso);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;transition:gap .3s,color .3s;width:fit-content}
+.view-gallery-btn::after{content:'→';font-size:16px}
+.view-gallery-btn:hover,.project-row:hover .view-gallery-btn{color:var(--gold);gap:16px}
+
+/* Thumbnail strip */
+.thumb-strip{display:flex;overflow-x:auto;gap:3px;background:var(--espresso);padding:3px 0;scrollbar-width:thin;scrollbar-color:var(--mocha) var(--espresso)}
+.thumb-strip::-webkit-scrollbar{height:4px}
+.thumb-strip::-webkit-scrollbar-thumb{background:var(--mocha)}
+.thumb-img{width:110px;height:76px;flex-shrink:0;object-fit:cover;opacity:.55;cursor:pointer;border:2px solid transparent;transition:opacity .25s,border-color .25s,transform .25s}
+.thumb-img:hover{opacity:1;border-color:var(--gold);transform:scaleY(1.04)}
+
+/* GALLERY OVERLAY */
+.gallery-overlay{position:fixed;inset:0;z-index:600;background:#180e06;opacity:0;pointer-events:none;transition:opacity .4s;display:flex;flex-direction:column}
+.gallery-overlay.open{opacity:1;pointer-events:all}
+.gallery-top{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;flex-shrink:0;border-bottom:1px solid rgba(196,181,165,.12)}
+.gal-project-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-light);font-style:italic}
+.gal-counter{font-size:12px;color:var(--taupe);letter-spacing:.18em}
+.gal-close{background:none;border:1px solid rgba(196,181,165,.3);color:var(--taupe);width:38px;height:38px;cursor:pointer;font-size:17px;transition:border-color .3s,color .3s;display:flex;align-items:center;justify-content:center}
+.gal-close:hover{border-color:var(--gold);color:var(--gold)}
+.gallery-stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;min-height:0}
+.gal-img-wrap{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:20px 76px}
+.gal-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 24px 70px rgba(0,0,0,.6);display:block}
+.gal-ph{width:100%;max-width:600px;aspect-ratio:4/3;background:linear-gradient(135deg,#3a2818,#2a1a0a);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(255,255,255,.25);font-style:italic}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-size:20px;width:50px;height:50px;cursor:pointer;transition:background .3s,color .3s,border-color .3s;display:flex;align-items:center;justify-content:center}
+.gal-nav:hover{background:var(--gold);color:var(--espresso);border-color:var(--gold)}
+.gal-nav.prev{left:14px}
+.gal-nav.next{right:14px}
+.gallery-filmstrip{display:flex;gap:3px;overflow-x:auto;flex-shrink:0;padding:10px 40px;background:rgba(0,0,0,.35);scrollbar-width:thin;scrollbar-color:var(--mocha) transparent}
+.gallery-filmstrip::-webkit-scrollbar{height:4px}
+.gallery-filmstrip::-webkit-scrollbar-thumb{background:var(--mocha)}
+.film-thumb{width:70px;height:48px;flex-shrink:0;object-fit:cover;opacity:.4;cursor:pointer;border:2px solid transparent;transition:opacity .2s,border-color .2s}
+.film-thumb:hover{opacity:.75}
+.film-thumb.active{opacity:1;border-color:var(--gold)}
+.film-ph{width:70px;height:48px;flex-shrink:0;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.3);border:2px solid transparent;cursor:pointer;transition:border-color .2s}
+.film-ph:hover,.film-ph.active{border-color:var(--gold)}
+.gallery-bottom{flex-shrink:0;padding:12px 40px;border-top:1px solid rgba(196,181,165,.1);display:flex;align-items:center;gap:16px}
+.gal-progress{flex:1;height:1px;background:rgba(196,181,165,.2)}
+.gal-progress-fill{height:100%;background:var(--gold);transition:width .45s ease}
+.gal-caption{font-size:11px;color:rgba(196,181,165,.45);letter-spacing:.1em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:260px}
+
+/* EXPERIENCE */
+#experience{padding:100px 60px;background:var(--espresso)}
+#experience .section-label{color:var(--gold)}
+#experience .section-label::before{background:var(--gold)}
+#experience .section-heading{color:var(--ivory)}
+#experience .section-heading em{color:var(--gold)}
+.exp-grid{display:grid;grid-template-columns:1fr 2fr;gap:60px;margin-top:60px;align-items:start}
+.exp-company{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--gold-light);margin-bottom:8px}
+.exp-role{font-size:13px;color:var(--taupe);letter-spacing:.1em;margin-bottom:6px}
+.exp-period{font-size:11px;color:rgba(196,181,165,.6);letter-spacing:.12em}
+.exp-location{font-size:11px;color:rgba(196,181,165,.5);margin-top:4px;letter-spacing:.1em}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:20px}
+.exp-points li{font-size:13.5px;line-height:1.85;color:rgba(249,246,240,.7);font-weight:300;padding-left:20px;position:relative}
+.exp-points li::before{content:'◆';position:absolute;left:0;top:4px;font-size:6px;color:var(--gold)}
+.cert-strip{margin-top:60px;border-top:1px solid rgba(196,181,165,.2);padding-top:40px;display:flex;align-items:flex-start;gap:40px}
+.cert-badge{background:rgba(201,169,110,.12);border:1px solid var(--gold);padding:14px 20px;flex-shrink:0}
+.cert-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold-light);margin-bottom:4px}
+.cert-inst{font-size:11px;color:var(--taupe);letter-spacing:.1em}
+.cert-desc{font-size:13px;color:rgba(249,246,240,.6);line-height:1.75;max-width:500px}
+
+/* CONTACT */
+#contact{padding:100px 60px;background:var(--ivory);display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.contact-info{margin-top:40px}
+.contact-line{display:flex;align-items:flex-start;gap:16px;padding:18px 0;border-bottom:1px solid var(--sand)}
+.contact-icon{font-size:16px;color:var(--gold);width:22px;margin-top:2px}
+.contact-detail{font-size:14px;color:var(--mocha)}
+.contact-detail strong{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--taupe);margin-bottom:3px;font-weight:400}
+.contact-detail a{color:var(--mocha);text-decoration:none;transition:color .3s}
+.contact-detail a:hover{color:var(--gold)}
+.contact-form{display:flex;flex-direction:column;gap:20px;padding-top:60px}
+.form-group{display:flex;flex-direction:column;gap:7px}
+.form-label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--taupe)}
+.form-input,.form-textarea{border:none;border-bottom:1px solid var(--sand);background:transparent;padding:12px 0;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--espresso);transition:border-color .3s;outline:none}
+.form-input:focus,.form-textarea:focus{border-color:var(--gold)}
+.form-textarea{resize:none;min-height:90px}
+.form-submit{background:var(--espresso);color:var(--ivory);border:none;padding:15px 38px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;align-self:flex-start;transition:background .3s,transform .2s;margin-top:8px}
+.form-submit:hover{background:var(--gold);transform:translateY(-2px)}
+
+footer{background:var(--espresso);padding:36px 60px;display:flex;justify-content:space-between;align-items:center}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-light);letter-spacing:.12em}
+.footer-copy{font-size:11px;color:var(--taupe);letter-spacing:.1em}
+.footer-socials{display:flex;gap:16px}
+.social-link{width:36px;height:36px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:var(--taupe);text-decoration:none;font-size:12px;transition:border-color .3s,color .3s}
+.social-link:hover{border-color:var(--gold);color:var(--gold)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr}
+  .hero-right{height:60vw;min-height:280px}
+  .hero-left::after{display:none}
+  nav{padding:18px 20px}
+  .nav-links{display:none}
+  #about,#contact{grid-template-columns:1fr;gap:40px;padding:60px 20px}
+  #experience{padding-left:20px;padding-right:20px}
+  .exp-grid{grid-template-columns:1fr}
+  .hero-left{padding:100px 20px 60px}
+  .portfolio-header{padding:0 20px}
+  .project-row{grid-template-columns:1fr;min-height:auto}
+  .project-row:nth-child(even){direction:ltr}
+  .project-cover{min-height:280px}
+  .project-info{padding:36px 24px}
+  footer{padding:24px 20px;flex-direction:column;gap:16px;text-align:center}
+  .gal-img-wrap{padding:12px 56px}
+  .gal-nav.prev{left:4px}
+  .gal-nav.next{right:4px}
+  .gallery-top,.gallery-bottom,.gallery-filmstrip{padding-left:14px;padding-right:14px}
+  .cert-strip{flex-direction:column;gap:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a class="nav-logo" href="#">A.V.P.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">Interior Design &amp; Construction</span>
+    <h1 class="hero-name">Abhishek<br><em>V Prem</em></h1>
+    <p class="hero-title">Design Manager · Space Curator</p>
+    <p class="hero-quals">MBA Construction Management &nbsp;·&nbsp; BTech Civil Engineering</p>
+    <p class="hero-desc">Where engineering precision meets design intuition — crafting spaces that are as structurally sound as they are visually compelling. Fluent in AutoCAD, Revit, 3Ds Max &amp; Lumion.</p>
+    <div class="hero-ctas">
+      <a href="#portfolio" class="btn-primary">View Portfolio</a>
+      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-area">
+      <img src="photos/hero.jpeg" alt="Abhishek V Prem"
+           onerror="this.style.display='none';document.getElementById('hf').style.display='flex'">
+      <div id="hf" class="hero-placeholder" style="display:none">
+        <div class="hp-icon">✦</div><p>photos/hero.jpeg</p>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">50</span><span class="stat-label">Photos</span></div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-label">Projects</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Residential Interiors</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Space Planning</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">3D Visualization</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">AutoCAD · Revit · Lumion</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Material Curation</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Commercial Design</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">BIM Implementation</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Project Management</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Residential Interiors</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Space Planning</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">3D Visualization</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">AutoCAD · Revit · Lumion</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Material Curation</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Commercial Design</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">BIM Implementation</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Project Management</span><span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about-img-col reveal">
+    <div class="about-img-frame">
+      <img src="photos/portrait.jpeg" alt="Abhishek V Prem" onerror="this.style.display='none'">
+      <div class="aif-placeholder">photos/portrait.jpeg</div>
+    </div>
+    <div class="about-img-accent"></div>
+    <div class="about-badge">Bengaluru · Pune</div>
+  </div>
+  <div class="reveal">
+    <span class="section-label">About Me</span>
+    <h2 class="section-heading">Engineering meets<br><em>design thinking</em></h2>
+    <p class="about-para">I'm a results-driven graduate with an MBA in Advanced Construction Management and a BTech in Civil Engineering — now channelling that technical depth into interior design. My dual background means I approach every space with both an aesthetic eye and structural rigour.</p>
+    <p class="about-para">Completed a Diploma in Interior Designing at Planners, Ernakulam, I've built hands-on skills in space planning, colour theory, material selection, and furniture design — combining them with professional tools like AutoCAD, 3Ds Max, Revit, and Lumion.</p>
+    <div class="edu-cards">
+      <div class="edu-card">
+        <div class="edu-degree">MBA — Advanced Construction Management</div>
+        <div class="edu-school">NICMAR University, Pune</div>
+        <div class="edu-year">July 2024 – Present</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">BTech — Civil Engineering</div>
+        <div class="edu-school">Amal Jyothi College of Engineering, Kottayam</div>
+        <div class="edu-year">2018 – 2022 &nbsp;·&nbsp; CGPA 8.52 / 10</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Diploma in Interior Designing</div>
+        <div class="edu-school">Planners, Ernakulam</div>
+        <div class="edu-year">May – July 2025</div>
+      </div>
+    </div>
+    <div class="skills-wrap">
+      <p class="skills-label">Design Tools</p>
+      <div class="skills-row">
+        <span class="skill-pill hl">AutoCAD</span>
+        <span class="skill-pill hl">3Ds Max</span>
+        <span class="skill-pill hl">Lumion</span>
+        <span class="skill-pill hl">Revit</span>
+        <span class="skill-pill">SketchUp</span>
+        <span class="skill-pill">Photoshop</span>
+      </div>
+      <p class="skills-label" style="margin-top:10px">Project &amp; Management</p>
+      <div class="skills-row">
+        <span class="skill-pill">Primavera P6</span>
+        <span class="skill-pill">MS Project</span>
+        <span class="skill-pill">BIM</span>
+        <span class="skill-pill">Space Planning</span>
+        <span class="skill-pill">Material Board</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-header reveal">
+    <div>
+      <span class="section-label">Selected Work</span>
+      <h2 class="section-heading">My <em>Portfolio</em></h2>
+    </div>
+    <div class="portfolio-total">03</div>
+  </div>
+
+  <!-- PROJECT 01 -->
+  <div class="project-row reveal" onclick="openGallery(0)">
+    <div class="project-cover" id="cover-0">
+      <div class="cover-slider" id="slider-0"></div>
+      <div class="cover-dots" id="dots-0"></div>
+    </div>
+    <div class="project-info">
+      <div class="project-num">01</div>
+      <div class="project-cat">Residential</div>
+      <h3 class="project-title">Home Interior Design</h3>
+      <p class="project-desc">A complete residential interior exploring warmth, materiality, and the balance between open living and private retreat. Developed full space plans, mood boards, and material specifications across all key rooms.</p>
+      <div class="project-meta">
+        <span class="project-tag">Space Planning</span>
+        <span class="project-tag">Materials</span>
+        <span class="project-tag">3D Render</span>
+        <span class="project-tag">Lighting</span>
+      </div>
+      <button class="view-gallery-btn">View Full Gallery</button>
+    </div>
+  </div>
+  <div class="thumb-strip" id="thumbs-0"></div>
+
+  <!-- PROJECT 02 -->
+  <div class="project-row reveal" onclick="openGallery(1)">
+    <div class="project-cover" id="cover-1">
+      <div class="cover-slider" id="slider-1"></div>
+      <div class="cover-dots" id="dots-1"></div>
+    </div>
+    <div class="project-info">
+      <div class="project-num">02</div>
+      <div class="project-cat">Residential</div>
+      <h3 class="project-title">Living Room Concept</h3>
+      <p class="project-desc">A curated living room design centred on light, texture, and intentional furniture placement. The concept balances aesthetic appeal with practical flow, incorporating colour theory and layered material palettes.</p>
+      <div class="project-meta">
+        <span class="project-tag">Furniture Layout</span>
+        <span class="project-tag">Colour Theory</span>
+        <span class="project-tag">Lighting Design</span>
+      </div>
+      <button class="view-gallery-btn">View Gallery</button>
+    </div>
+  </div>
+  <div class="thumb-strip" id="thumbs-1"></div>
+
+  <!-- PROJECT 03 -->
+  <div class="project-row reveal" onclick="openGallery(2)">
+    <div class="project-cover" id="cover-2">
+      <div class="cover-slider" id="slider-2"></div>
+      <div class="cover-dots" id="dots-2"></div>
+    </div>
+    <div class="project-info">
+      <div class="project-num">03</div>
+      <div class="project-cat">Commercial · Diploma Project</div>
+      <h3 class="project-title">Commercial Workspace</h3>
+      <p class="project-desc">An office environment designed for productivity and brand identity — developed as part of the Diploma in Interior Designing at Planners, Ernakulam. Focuses on space planning, ergonomics, acoustics, material selection, and visual cohesion for a professional work setting.</p>
+      <div class="project-meta">
+        <span class="project-tag">Office Design</span>
+        <span class="project-tag">Ergonomics</span>
+        <span class="project-tag">Brand Identity</span>
+        <span class="project-tag">Acoustics</span>
+      </div>
+      <button class="view-gallery-btn">View Full Gallery</button>
+    </div>
+  </div>
+  <div class="thumb-strip" id="thumbs-2"></div>
+</section>
+
+<!-- GALLERY OVERLAY — opens WITHIN the page, not a new tab -->
+<div class="gallery-overlay" id="galOverlay">
+  <div class="gallery-top">
+    <span class="gal-project-name" id="galTitle"></span>
+    <span class="gal-counter" id="galCounter"></span>
+    <button class="gal-close" id="galClose">✕</button>
+  </div>
+  <div class="gallery-stage">
+    <button class="gal-nav prev" id="galPrev">←</button>
+    <div class="gal-img-wrap" id="galImgWrap"></div>
+    <button class="gal-nav next" id="galNext">→</button>
+  </div>
+  <div class="gallery-filmstrip" id="galFilmstrip"></div>
+  <div class="gallery-bottom">
+    <div class="gal-progress"><div class="gal-progress-fill" id="galFill"></div></div>
+    <span class="gal-caption" id="galCaption"></span>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="reveal">
+    <span class="section-label">Professional Experience</span>
+    <h2 class="section-heading">Built in the <em>Field</em></h2>
+  </div>
+  <div class="exp-grid">
+    <div class="reveal">
+      <div class="exp-company">ACORP Ltd</div>
+      <div class="exp-role">Project Management Intern</div>
+      <div class="exp-period">May 2025 – July 2025</div>
+      <div class="exp-location">Bangalore, India</div>
+    </div>
+    <ul class="exp-points reveal">
+      <li>Assisted in project scheduling and progress tracking using Microsoft Project for a <strong style="color:var(--gold-light)">50,000 sq.ft. commercial workspace project</strong> — gaining hands-on exposure to large-scale construction workflows.</li>
+      <li>Conducted daily site inspections to monitor work quality, safety standards, and adherence to GFC drawings; prepared weekly progress, quality, and safety reports.</li>
+      <li>Participated in client coordination meetings, gaining exposure to stakeholder communication and project planning.</li>
+      <li>Utilised AutoCAD for drawing reviews and material tracking to support project sequencing; verified layout markings against drawings and coordinated with the project team to resolve on-site deviations.</li>
+    </ul>
+  </div>
+  <div class="cert-strip reveal">
+    <div class="cert-badge">
+      <div class="cert-name">Diploma · Interior Designing</div>
+      <div class="cert-inst">Planners, Ernakulam &nbsp;·&nbsp; 2025</div>
+    </div>
+    <p class="cert-desc">Completed training in space planning, colour theory, material selection, and furniture design. Gained hands-on experience in AutoCAD drawings, 3D visualisations, and client-centric design execution — with skills in project planning and design coordination for residential and commercial interiors.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="reveal">
+    <span class="section-label">Get In Touch</span>
+    <h2 class="section-heading">Let's Create<br><em>Together</em></h2>
+    <div class="contact-info">
+      <div class="contact-line"><span class="contact-icon">✉</span><div class="contact-detail"><strong>Email</strong><a href="mailto:abhishekvalamkudiyil@gmail.com">abhishekvalamkudiyil@gmail.com</a></div></div>
+      <div class="contact-line"><span class="contact-icon">✆</span><div class="contact-detail"><strong>Phone</strong><a href="tel:+918078709016">+91 8078709016</a></div></div>
+      <div class="contact-line"><span class="contact-icon">⌖</span><div class="contact-detail"><strong>Location</strong>Godrej Green Cove, Mahalunge, Pune — 411045</div></div>
+      <div class="contact-line"><span class="contact-icon">◈</span><div class="contact-detail"><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/abhishekvprem/" target="_blank">linkedin.com/in/abhishekvprem</a></div></div>
+      <div class="contact-line"><span class="contact-icon">◉</span><div class="contact-detail"><strong>Availability</strong>Open to full-time roles &amp; freelance projects</div></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="How should I address you?"></div>
+      <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label class="form-label">Project Type</label><input class="form-input" type="text" placeholder="Residential / Commercial / Consultation"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your vision..."></textarea></div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Abhishek V Prem</div>
+  <p class="footer-copy">© 2025 · Interior Design &amp; Construction Portfolio</p>
+  <div class="footer-socials">
+    <a class="social-link" href="https://www.linkedin.com/in/abhishekvprem/" target="_blank">in</a>
+    <a class="social-link" href="mailto:abhishekvalamkudiyil@gmail.com">✉</a>
+    <a class="social-link" href="#">Be</a>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   PHOTO CONFIGURATION  ← ONLY SECTION YOU NEED TO EDIT
+   ──────────────────────────────────────────────────────────
+   Folder structure next to your index.html:
+   ├── index.html
+   └── photos/
+       ├── hero.jpeg
+       ├── portrait.jpeg
+       ├── home/       → home1.jpg, home2.jpg ... home33.jpg
+       ├── livingroom/ → pic1.png
+       └── workspace/  → 1.1.png, 1.2.png ... etc.
+
+   • Change filenames below to match your actual files exactly
+   • Any format works: .jpg .jpeg .png .webp
+   • Missing files are silently skipped — no broken images
+   ══════════════════════════════════════════════════════════════ */
+
+const PROJECTS = [
+
+  /* PROJECT 01 — HOME INTERIOR (33 photos) */
+  {
+    name: 'Home Interior Design',
+    photos: [
+      { path:'photos/home/home1.jpg',  caption:'Home Interior · 01' },
+      { path:'photos/home/home2.jpg',  caption:'Home Interior · 02' },
+      { path:'photos/home/home3.jpg',  caption:'Home Interior · 03' },
+      { path:'photos/home/home4.jpg',  caption:'Home Interior · 04' },
+      { path:'photos/home/home5.jpg',  caption:'Home Interior · 05' },
+      { path:'photos/home/home6.jpg',  caption:'Home Interior · 06' },
+      { path:'photos/home/home7.jpg',  caption:'Home Interior · 07' },
+      { path:'photos/home/home8.jpg',  caption:'Home Interior · 08' },
+      { path:'photos/home/home9.jpg',  caption:'Home Interior · 09' },
+      { path:'photos/home/home10.jpg', caption:'Home Interior · 10' },
+      { path:'photos/home/home11.jpg', caption:'Home Interior · 11' },
+      { path:'photos/home/home12.jpg', caption:'Home Interior · 12' },
+      { path:'photos/home/home13.jpg', caption:'Home Interior · 13' },
+      { path:'photos/home/home14.jpg', caption:'Home Interior · 14' },
+      { path:'photos/home/home15.jpg', caption:'Home Interior · 15' },
+      { path:'photos/home/home16.jpg', caption:'Home Interior · 16' },
+      { path:'photos/home/home17.jpg', caption:'Home Interior · 17' },
+      { path:'photos/home/home18.jpg', caption:'Home Interior · 18' },
+      { path:'photos/home/home19.jpg', caption:'Home Interior · 19' },
+      { path:'photos/home/home20.jpg', caption:'Home Interior · 20' },
+      { path:'photos/home/home21.jpg', caption:'Home Interior · 21' },
+      { path:'photos/home/home22.jpg', caption:'Home Interior · 22' },
+      { path:'photos/home/home23.jpg', caption:'Home Interior · 23' },
+      { path:'photos/home/home24.jpg', caption:'Home Interior · 24' },
+      { path:'photos/home/home25.jpg', caption:'Home Interior · 25' },
+      { path:'photos/home/home26.jpg', caption:'Home Interior · 26' },
+      { path:'photos/home/home27.jpg', caption:'Home Interior · 27' },
+      { path:'photos/home/home28.jpg', caption:'Home Interior · 28' },
+      { path:'photos/home/home29.jpg', caption:'Home Interior · 29' },
+      { path:'photos/home/home30.jpg', caption:'Home Interior · 30' },
+      { path:'photos/home/home31.jpg', caption:'Home Interior · 31' },
+      { path:'photos/home/home32.jpg', caption:'Home Interior · 32' },
+      { path:'photos/home/home33.jpg', caption:'Home Interior · 33' },
+    ]
+  },
+
+  /* PROJECT 02 — LIVING ROOM (1 photo) */
+  {
+    name: 'Living Room Concept',
+    photos: [
+      { path:'photos/livingroom/pic1.png', caption:'Living Room Concept' },
+    ]
+  },
+
+  /* PROJECT 03 — COMMERCIAL WORKSPACE */
+  /* Add/remove lines to match your actual files */
+  {
+    name: 'Commercial Workspace',
+    photos: [
+      { path:'photos/workspace/1.1.png', caption:'Commercial Workspace · 01' },
+      { path:'photos/workspace/1.2.png', caption:'Commercial Workspace · 02' },
+      { path:'photos/workspace/1.3.png', caption:'Commercial Workspace · 03' },
+      { path:'photos/workspace/1.4.png', caption:'Commercial Workspace · 04' },
+      { path:'photos/workspace/1.5.png', caption:'Commercial Workspace · 05' },
+      { path:'photos/workspace/1.6.png', caption:'Commercial Workspace · 06' },
+      { path:'photos/workspace/1.7.png', caption:'Commercial Workspace · 07' },
+      { path:'photos/workspace/1.8.png', caption:'Commercial Workspace · 08' },
+      { path:'photos/workspace/1.9.png', caption:'Commercial Workspace · 09' },
+      /* add more:
+      { path:'photos/workspace/1.10.png', caption:'Commercial Workspace · 10' },
+      */
+    ]
+  }
+];
+
+/* ══════════════ DO NOT EDIT BELOW ══════════════ */
+
+/* Cursor */
+const cur = document.getElementById('cursor'), rng = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px';
+  rng.style.left = e.clientX+'px'; rng.style.top = e.clientY+'px';
+});
+
+/* Scroll reveal */
+const ro = new IntersectionObserver(en => en.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ══ BUILD COVER SLIDERS ══
+   Each project cover auto-slides through its photos every 2.8s.
+   Dots appear at the bottom. Clicking a dot jumps to that slide.
+   Stops auto-sliding on hover so user can read project info.      */
+
+const coverStates = []; // { current, total, timer }
+
+PROJECTS.forEach((proj, pi) => {
+  const sliderEl = document.getElementById('slider-'+pi);
+  const dotsEl   = document.getElementById('dots-'+pi);
+  const coverEl  = document.getElementById('cover-'+pi);
+  if (!sliderEl) return;
+
+  const validPhotos = proj.photos; // we show all; missing ones show broken → hidden by onerror
+  const total = validPhotos.length;
+
+  /* Build slides */
+  validPhotos.forEach((photo, idx) => {
+    const slide = document.createElement('div');
+    slide.className = 'cover-slide';
+    const img = document.createElement('img');
+    img.src = photo.path;
+    img.alt = photo.caption;
+    img.loading = idx === 0 ? 'eager' : 'lazy';
+    img.onerror = function(){ this.parentElement.style.display='none'; };
+    slide.appendChild(img);
+    sliderEl.appendChild(slide);
+  });
+
+  /* Fallback if no photos */
+  if (total === 0) {
+    const ph = document.createElement('div');
+    ph.className = 'cover-ph';
+    ph.innerHTML = '<span class="cover-ph-icon">✦</span>Add photos to folder';
+    sliderEl.parentElement.appendChild(ph);
+  }
+
+  /* Build dots (only if >1 photo) */
+  if (total > 1) {
+    validPhotos.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.className = 'cover-dot' + (idx===0?' active':'');
+      dot.addEventListener('click', e => { e.stopPropagation(); goSlide(pi, idx); });
+      dotsEl.appendChild(dot);
+    });
+  }
+
+  coverStates[pi] = { current: 0, total };
+
+  /* Auto-slide */
+  function startAuto() {
+    coverStates[pi].timer = setInterval(() => {
+      const next = (coverStates[pi].current + 1) % total;
+      goSlide(pi, next);
+    }, 2800);
+  }
+  startAuto();
+
+  /* Pause on hover */
+  coverEl.addEventListener('mouseenter', () => clearInterval(coverStates[pi].timer));
+  coverEl.addEventListener('mouseleave', startAuto);
+});
+
+function goSlide(pi, idx) {
+  const state   = coverStates[pi];
+  if (!state) return;
+  state.current = idx;
+  const sliderEl = document.getElementById('slider-'+pi);
+  const dotsEl   = document.getElementById('dots-'+pi);
+  if (sliderEl) sliderEl.style.transform = `translateX(-${idx * 100}%)`;
+  if (dotsEl) Array.from(dotsEl.children).forEach((d,i) => d.classList.toggle('active', i===idx));
+}
+
+/* ══ THUMBNAIL STRIPS ══ */
+PROJECTS.forEach((proj, pi) => {
+  const strip = document.getElementById('thumbs-'+pi);
+  if (!strip) return;
+  proj.photos.forEach((photo, idx) => {
+    const img = document.createElement('img');
+    img.className = 'thumb-img';
+    img.src = photo.path;
+    img.alt = photo.caption;
+    img.title = photo.caption;
+    img.loading = 'lazy';
+    img.onerror = function(){ this.style.display='none'; };
+    img.addEventListener('click', e => { e.stopPropagation(); openGallery(pi, idx); });
+    strip.appendChild(img);
+  });
+});
+
+/* ══ GALLERY OVERLAY — stays within the page ══ */
+const overlay    = document.getElementById('galOverlay');
+const galTitle   = document.getElementById('galTitle');
+const galCounter = document.getElementById('galCounter');
+const galImgWrap = document.getElementById('galImgWrap');
+const galFilm    = document.getElementById('galFilmstrip');
+const galFill    = document.getElementById('galFill');
+const galCaption = document.getElementById('galCaption');
+
+let activePi = 0, activeIdx = 0, galOpen = false;
+
+function openGallery(pi, idx=0) {
+  activePi = pi; activeIdx = idx; galOpen = true;
+  document.body.style.overflow = 'hidden';
+  buildFilmstrip();
+  showPhoto();
+  overlay.classList.add('open');
+}
+
+function closeGallery() {
+  overlay.classList.remove('open');
+  galOpen = false;
+  document.body.style.overflow = '';
+}
+
+function buildFilmstrip() {
+  galFilm.innerHTML = '';
+  PROJECTS[activePi].photos.forEach((p, i) => {
+    const el = document.createElement('img');
+    el.className = 'film-thumb' + (i===activeIdx?' active':'');
+    el.src = p.path; el.alt = p.caption; el.loading = 'lazy';
+    el.onerror = function(){
+      const ph = document.createElement('div');
+      ph.className = 'film-ph' + (i===activeIdx?' active':'');
+      ph.textContent = String(i+1).padStart(2,'0');
+      ph.addEventListener('click', () => { activeIdx=i; showPhoto(); });
+      this.replaceWith(ph);
+    };
+    el.addEventListener('click', () => { activeIdx=i; showPhoto(); });
+    galFilm.appendChild(el);
+  });
+}
+
+function showPhoto() {
+  const proj = PROJECTS[activePi];
+  const p    = proj.photos[activeIdx];
+  const tot  = proj.photos.length;
+
+  galTitle.textContent   = proj.name;
+  galCounter.textContent = String(activeIdx+1).padStart(2,'0') + ' / ' + String(tot).padStart(2,'0');
+  galFill.style.width    = ((activeIdx+1)/tot*100)+'%';
+  galCaption.textContent = p.caption;
+
+  galImgWrap.innerHTML = `<img src="${p.path}" alt="${p.caption}"
+    onerror="this.outerHTML='<div class=\\'gal-ph\\'>${p.caption}</div>'">`;
+
+  Array.from(galFilm.children).forEach((el,i) => el.classList.toggle('active', i===activeIdx));
+  const at = galFilm.children[activeIdx];
+  if (at) at.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+}
+
+function galGo(d) {
+  const tot = PROJECTS[activePi].photos.length;
+  activeIdx = (activeIdx + d + tot) % tot;
+  showPhoto();
+}
+
+document.getElementById('galPrev').addEventListener('click',  () => galGo(-1));
+document.getElementById('galNext').addEventListener('click',  () => galGo(+1));
+document.getElementById('galClose').addEventListener('click', closeGallery);
+overlay.addEventListener('click', e => { if(e.target===overlay) closeGallery(); });
+
+document.addEventListener('keydown', e => {
+  if (!galOpen) return;
+  if (e.key==='Escape')     closeGallery();
+  if (e.key==='ArrowLeft')  galGo(-1);
+  if (e.key==='ArrowRight') galGo(+1);
+});
+
+let tx = 0;
+galImgWrap.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+galImgWrap.addEventListener('touchend',   e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) galGo(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+/* Contact form */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Message Sent ✓'; btn.style.background = 'var(--accent)';
+  setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; }, 3500);
+}
+</script>
+</body>
+</html>
